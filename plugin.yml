@@ -1,0 +1,14 @@
+name: MinecraftPlus
+version: 0.1
+main: MinecraftPlugin
+commands:
+  serverHealth:
+    description: Check server status from the console
+    usage: /shealth
+  connectionHealth:
+    description: Check the player connection to the server
+    usage: /connectionHealth
+  protect:
+    description: Protect a structure from griefing for a price depending on the size of the structure
+    usage: /protect
+  
