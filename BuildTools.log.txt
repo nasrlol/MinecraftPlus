@@ -1,0 +1,25 @@
+[--rev, 1.20.1]
+Loading BuildTools version: git-BuildTools-f901b6f-188 (#188)
+Java Version: Java 23
+Current Path: /Users/nsrddyn/Documents/MinecraftPlus
+git version 2.47.1
+openjdk version "23.0.1" 2024-10-15
+OpenJDK Runtime Environment (build 23.0.1+11-39)
+OpenJDK 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
+Attempting to build version: '1.20.1' use --rev <version> to override
+Found version
+{
+	"name": "3871",
+	"description": "Jenkins build 3871",
+	"refs": {
+		"BuildData": "221903b51701960ac778d8641b31cebcf411caa8",
+		"Bukkit": "69c7ce23f295a5bf1b1b7128bc1daece4ead768e",
+		"CraftBukkit": "3f9263ba3a726846a9466e12da95d73229af4ad9",
+		"Spigot": "d2eba2c820b52b742eb542c6d2c4d76e3d743570"
+	},
+	"toolsVersion": 148,
+	"javaVersions": [61, 65]
+}
+
+*** The version you have requested to build requires Java versions between [Java 17, Java 21], but you are using Java 23
+*** Please rerun BuildTools using an appropriate Java version. For obvious reasons outdated MC versions do not support Java versions that did not exist at their release.

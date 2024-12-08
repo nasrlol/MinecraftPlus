@@ -1,66 +1,112 @@
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.entity.player;
-import java.utils.ArrayList;
+import org.bukkit.entity.Player;
+import java.util.ArrayList;
+
+// ip adress modules to get the server adress
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 
 public class CommandHandling extends JavaPlugin {
-    static void serverHealth(String consoleCommand) {
 
-        class current_server {
-            String name;
-            int id;
-            int ping_to_host;
-            int server_load;
+    // Method to handle server health requests
+    public static void serverHealth(String consoleCommand) {
+        // Create a class to store server information (server name, version, etc.)
+        class ServerInformation {
+            String serverName = CommandHandling.getServer().getName();  // Get the server name
+            String serverVersion = CommandHandling.getServer().getVersion();  // Get the server version
 
-            try:
-            current_server.name =
-
+           public void get_ip_adress(String[] args){
+                try {
+                    InetAddress address = InetAddress.getLocalHost();
+                    System.out.println("IP address: " + address.getHostAddress());
+                } catch (UnknownHostException ex) {
+                    System.out.println("Could not find IP address for this host");
+                }
+            }
+            // Server network information
+            String serverIP = get_ip_adress(args)  // Get the server IP (returns empty if not set)
+            int serverPort = CommandHandling.getServer().getPort();  // Get the server port
         }
+
+        // Log the health check request (this is just an example, you could send info to players)
         System.out.println("Server status request received: " + consoleCommand);
+        
+        // You could use the 'ServerInformation' object to display the actual server data
+        // Example: print server information (you could also send this to a player)
+        System.out.println("Server Name: " + serverName);
+        System.out.println("Server Version: " + serverVersion);
+        System.out.println("Server IP: " + serverIP);
+        System.out.println("Server Port: " + serverPort);
     }
 
-    static void connectionHealth(String consoleCommand) {
-        System.out.println("Player health request received: " + consoleCommand);
-
-    }
-
-
+    // Class to handle game-related commands (e.g., structure protection)
     class GameBasedCommands {
-        public void protectStructure(structureID) {
+        // Method to handle structure protection
+        public void protectStructure(String structureID) {
+            // This could involve saving the structure's coordinates and making them invincible
 
+            // Option 1: Store coordinates in a list
+            ArrayList<String> protectedStructures = new ArrayList<>();
+            protectedStructures.add(structureID);
 
+            // Option 2: Make the structure invincible (this would involve some other logic for protection)
 
-            // two options:
-            // - make the user add the coordonites of structures to  a list of structures
-            // - make the designated coordonites invinsabl
-
-            System.out.println("Structure protection activated!");
+            System.out.println("Structure protection activated for: " + structureID);
         }
     }
 
+    // Class to handle player-related commands
     class PlayerCommands {
+        // Method to handle player commands
         public void handlePlayerCommand(String command) {
+            // This can be extended to check and handle specific commands from players
             System.out.println("Player command received: " + command);
         }
     }
 
     @Override
     public void onEnable() {
+        // This method is called when the plugin is enabled
         System.out.println("Plugin enabled!");
 
+        // Example calls to serverHealth and connectionHealth
         serverHealth("Check server health");
         connectionHealth("Check player health");
 
+        // Create and use the GameBasedCommands class to protect a structure
         GameBasedCommands gameCommands = new GameBasedCommands();
-        gameCommands.protectStructure();
+        gameCommands.protectStructure("structureXYZ");  // Pass the structure ID as a string
 
+        // Create and use the PlayerCommands class to handle a command
         PlayerCommands playerCommands = new PlayerCommands();
-        playerCommands.handlePlayerCommand("Example command");
+        playerCommands.handlePlayerCommand("Example player command");
+
+        // Note: The commands here should be triggered from actual events in Minecraft (not just hardcoded like this)
     }
 
     @Override
     public void onDisable() {
+        // This method is called when the plugin is disabled
         System.out.println("Plugin disabled!");
+    }
+
+    // Handling commands from players in the game
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        // Check if the command is /serverinfo (this is just an example)
+        if (cmd.getName().equalsIgnoreCase("serverinfo")) {
+            // Send the server info to the player (this could be more complex)
+            sender.sendMessage("Server Name: " + getServer().getName());
+            sender.sendMessage("Server Version: " + getServer().getVersion());
+            sender.sendMessage("Server IP: " + serverIP;
+            sender.sendMessage("Server Port: " + getServer().getPort());
+            return true;
+        }
+
+        // Handle other commands here
+        return false;
     }
 }

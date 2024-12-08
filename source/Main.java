@@ -1,10 +1,13 @@
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
-
-Public class Main {
-    public static void main(String[] args){
-
-
-
-
-    }
+public class Main {
+   public static void main(String[] args) {
+      try {
+         InetAddress address = InetAddress.getLocalHost();
+         System.out.println("IP address: " + address.getHostAddress());
+      } catch (UnknownHostException ex) {
+         System.out.println("Could not find IP address for this host");
+      }
+   }
 }
