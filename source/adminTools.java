@@ -1,10 +1,66 @@
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.Player;
 import java.util.ArrayList;
+// ip adress modules to get the server adress
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+public class adminTools {
+
+
+
 
 public class CommandHandling extends JavaPlugin {
+
+    // Method to handle server health requests
+    public static void serverHealth(String consoleCommand) {
+        // Create a class to store server information (server name, version, etc.)
+        class ServerInformation{
+            
+            public void serverName(){
+            InetAddress ip;
+            String hostname;
+            try {
+                ip = InetAddress.getLocalHost();
+                hostname = ip.getHostName();
+                System.out.println("Your current IP address : " + ip);
+                System.out.println("Your current Hostname : " + hostname);
+            } catch (UnknownHostException e){
+                System.out.println("Error while receiving the server hostname");
+            } 
+           
+        }
+                
+            String serverName = CommandHandling.getServer().getName();  // Get the server name
+            
+            // What defines the server version? Server optimization?
+            String serverVersion = CommandHandling.getServer().getVersion();  // Get the server version
+            
+            public void getIPAddress() {
+                try {
+                    InetAddress address = InetAddress.getLocalHost();
+                    System.out.println("IP address: " + address.getHostAddress());
+                } catch (UnknownHostException ex) {
+                    System.out.println("Could not find IP address for this host");
+                }
+            }
+            // Server network information
+            String serverIP = get_ip_adress()  // Get the server IP (returns empty if not set)
+            int serverPort = CommandHandling.getServer().getPort();  // Get the server port
+        }
+
+        // Log the health check request (this is just an example, you could send info to players)
+        System.out.println("Server status request received: " + consoleCommand);
+        
+        // You could use the 'ServerInformation' object to display the actual server data
+        // Example: print server information (you could also send this to a player)
+        System.out.println("Server Name: " + serverName);
+        System.out.println("Server Version: " + serverVersion);
+        System.out.println("Server IP: " + serverIP);
+        System.out.println("Server Port: " + serverPort);
+    }
 
     // Class to handle game-related commands (e.g., structure protection)
     class GameBasedCommands {
@@ -17,6 +73,7 @@ public class CommandHandling extends JavaPlugin {
             protectedStructures.add(structureID);
 
             // Option 2: Make the structure invincible (this would involve some other logic for protection)
+
             System.out.println("Structure protection activated for: " + structureID);
         }
     }
